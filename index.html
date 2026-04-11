@@ -562,9 +562,9 @@
     <h1>Kelola Keuangan Bisnis<br/><span class="accent">Lebih Mudah & Akurat</span></h1>
     <p>SIKANCIL adalah sistem akuntansi berbasis web yang dirancang khusus untuk UMKM, koperasi, dan yayasan Indonesia. Mudah digunakan, tanpa perlu latar belakang akuntansi.</p>
     <div class="hero-cta">
-      <a href="https://sikancil-frontend.vercel.app/register" class="btn btn-primary btn-lg">
-        Mulai Gratis 14 Hari →
-      </a>
+      <button onclick="tryDemo()" class="btn btn-primary btn-lg btn-demo">
+        Coba Demo Gratis →
+      </button>
       <a href="#harga" class="btn btn-outline btn-lg">Lihat Paket</a>
     </div>
     <div class="hero-stat">
@@ -765,7 +765,7 @@
             <li class="inc"><span class="check">✓</span> Custom COA</li>
             <li><span class="cross">✗</span> Export Excel</li>
           </ul>
-          <a href="https://sikancil-frontend.vercel.app/register" class="price-cta" style="background:#059669;color:#fff;">Pilih Student</a>
+          <a href="https://sikancil-frontend.vercel.app/register" class="price-cta" style="background:#059669;color:#fff;" onclick="window.open('https://sikancil-frontend.vercel.app/register')">Pilih Student</a>
         </div>
 
         <!-- Basic -->
@@ -890,7 +890,7 @@
       <h2>Siap Mulai Kelola<br/>Keuangan Bisnis Anda?</h2>
       <p>Daftar sekarang dan nikmati 14 hari trial gratis. Tidak perlu kartu kredit.</p>
       <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
-        <a href="https://sikancil-frontend.vercel.app/register" class="btn btn-primary btn-lg">Mulai Gratis 14 Hari →</a>
+        <button onclick="tryDemo()" class="btn btn-primary btn-lg btn-demo">Coba Demo Gratis →</button>
         <a href="/cdn-cgi/l/email-protection#4c3f393c3c233e380c3f25272d222f2520623b292e622528" class="btn btn-outline btn-lg">Hubungi Kami</a>
       </div>
     </div>
@@ -916,6 +916,35 @@
     };
 
     const suffix = { monthly: '/bln', yearly: '/thn' };
+
+    // ── Demo Login ─────────────────────────────────────────────
+    const BACKEND_URL = 'https://sikancil-backend-production.up.railway.app/api/v1';
+    const APP_URL     = 'https://sikancil-frontend.vercel.app';
+
+    async function tryDemo() {
+      const btns = document.querySelectorAll('.btn-demo');
+      btns.forEach(b => { b.textContent = 'Memuat Demo...'; b.disabled = true; });
+      try {
+        const res  = await fetch(`${BACKEND_URL}/auth/demo`, { method: 'POST' });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error || 'Gagal');
+
+        const { accessToken, user } = data.data;
+        // Simpan ke localStorage agar aplikasi frontend bisa baca
+        // Buka tab baru agar localStorage bisa diset di domain yang benar
+        const win = window.open('about:blank', '_blank');
+        win.document.write(`
+          <script>
+            localStorage.setItem('accessToken', '${accessToken}');
+            localStorage.setItem('is_demo', 'true');
+            window.location.href = '${APP_URL}/dashboard';
+          <\/script>
+        `);
+      } catch (err) {
+        alert('Demo tidak tersedia saat ini: ' + err.message);
+        btns.forEach(b => { b.textContent = 'Mulai Gratis 14 Hari →'; b.disabled = false; });
+      }
+    }
 
     function setBilling(cycle) {
       document.getElementById('btn-monthly').classList.toggle('active', cycle === 'monthly');
