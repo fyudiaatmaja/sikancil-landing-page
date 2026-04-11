@@ -565,7 +565,9 @@
       <button onclick="tryDemo()" class="btn btn-primary btn-lg btn-demo">
         Coba Demo Gratis →
       </button>
-      <a href="#harga" class="btn btn-outline btn-lg">Lihat Paket</a>
+      <a href="https://sikancil-frontend.vercel.app/register" class="btn btn-outline btn-lg">
+        Daftar Sekarang
+      </a>
     </div>
     <div class="hero-stat">
       <div class="stat-item">
@@ -765,7 +767,7 @@
             <li class="inc"><span class="check">✓</span> Custom COA</li>
             <li><span class="cross">✗</span> Export Excel</li>
           </ul>
-          <a href="https://sikancil-frontend.vercel.app/register" class="price-cta" style="background:#059669;color:#fff;" onclick="window.open('https://sikancil-frontend.vercel.app/register')">Pilih Student</a>
+          <a href="https://sikancil-frontend.vercel.app/register" class="price-cta" style="background:#059669;color:#fff;">Pilih Student</a>
         </div>
 
         <!-- Basic -->
@@ -891,6 +893,7 @@
       <p>Daftar sekarang dan nikmati 14 hari trial gratis. Tidak perlu kartu kredit.</p>
       <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
         <button onclick="tryDemo()" class="btn btn-primary btn-lg btn-demo">Coba Demo Gratis →</button>
+        <a href="https://sikancil-frontend.vercel.app/register" class="btn btn-outline btn-lg">Daftar Sekarang</a>
         <a href="/cdn-cgi/l/email-protection#4c3f393c3c233e380c3f25272d222f2520623b292e622528" class="btn btn-outline btn-lg">Hubungi Kami</a>
       </div>
     </div>
@@ -923,26 +926,16 @@
 
     async function tryDemo() {
       const btns = document.querySelectorAll('.btn-demo');
-      btns.forEach(b => { b.textContent = 'Memuat Demo...'; b.disabled = true; });
+      btns.forEach(b => { b.textContent = 'Memuat...'; b.disabled = true; });
       try {
-        const res  = await fetch(`${BACKEND_URL}/auth/demo`, { method: 'POST' });
+        const res  = await fetch(BACKEND_URL + '/auth/demo', { method: 'POST' });
         const data = await res.json();
-        if (!res.ok) throw new Error(data.error || 'Gagal');
-
-        const { accessToken, user } = data.data;
-        // Simpan ke localStorage agar aplikasi frontend bisa baca
-        // Buka tab baru agar localStorage bisa diset di domain yang benar
-        const win = window.open('about:blank', '_blank');
-        win.document.write(`
-          <script>
-            localStorage.setItem('accessToken', '${accessToken}');
-            localStorage.setItem('is_demo', 'true');
-            window.location.href = '${APP_URL}/dashboard';
-          <\/script>
-        `);
+        if (!res.ok) throw new Error(data.error || 'Demo tidak tersedia');
+        const token = data.data.accessToken;
+        window.location.href = APP_URL + '/demo-login?token=' + encodeURIComponent(token);
       } catch (err) {
-        alert('Demo tidak tersedia saat ini: ' + err.message);
-        btns.forEach(b => { b.textContent = 'Mulai Gratis 14 Hari →'; b.disabled = false; });
+        alert('Demo tidak tersedia: ' + err.message);
+        btns.forEach(b => { b.textContent = 'Coba Demo Gratis →'; b.disabled = false; });
       }
     }
 
