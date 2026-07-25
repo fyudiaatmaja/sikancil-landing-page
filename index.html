@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SIKANCIL — Sistem Informasi Keuangan & Akuntansi</title>
-  <meta name="description" content="Aplikasi akuntansi modern untuk UMKM, koperasi, dan yayasan Indonesia. Kelola keuangan bisnis Anda dengan mudah, cepat, dan akurat." />
+  <title>SIKANCIL — Sistem Informasi Akuntansi dan Manajemen</title>
+  <meta name="description" content="SIKANCIL adalah sistem informasi akuntansi dan manajemen berbasis web untuk UMKM, koperasi, BUMDes, LPD, dan Perumda Pasar di Indonesia — sesuai standar SAK EMKM & SAK EP." />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🦌</text></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -560,11 +560,11 @@
     <div class="hero-glow"></div>
     <div class="hero-badge">🦌 Akuntansi Modern untuk Bisnis Indonesia</div>
     <h1>Kelola Keuangan Bisnis<br/><span class="accent">Lebih Mudah & Akurat</span></h1>
-    <p>SIKANCIL adalah sistem akuntansi berbasis web yang dirancang khusus untuk UMKM, koperasi, dan yayasan Indonesia. Mudah digunakan, tanpa perlu latar belakang akuntansi.</p>
+    <p>SIKANCIL adalah sistem informasi akuntansi dan manajemen berbasis web yang dirancang khusus untuk UMKM, koperasi, BUMDes, LPD, dan Perumda Pasar di Indonesia — mudah digunakan tanpa perlu latar belakang akuntansi, dan sudah sesuai standar SAK EMKM &amp; SAK EP.</p>
     <div class="hero-cta">
-      <button onclick="(function(b){b.textContent='Memuat...';b.disabled=true;fetch('https://sikancil-backend-production.up.railway.app/api/v1/auth/demo',{method:'POST'}).then(r=>r.json()).then(d=>{if(!d.success)throw new Error(d.error);window.location.href='https://sikancil-frontend.vercel.app/demo-login?token='+encodeURIComponent(d.data.accessToken);}).catch(e=>{alert('Demo tidak tersedia: '+e.message);b.textContent='Coba Demo Gratis →';b.disabled=false;})})(this)"  class="btn btn-primary btn-lg">
+      <a href="https://sikancil-frontend.vercel.app/login" class="btn btn-primary btn-lg">
         Coba Demo Gratis →
-      </button>
+      </a>
       <a href="https://sikancil-frontend.vercel.app/register" class="btn btn-outline btn-lg">
         Daftar Sekarang
       </a>
@@ -608,6 +608,11 @@
           <div class="feature-icon" style="background:rgba(16,185,129,0.1);">📊</div>
           <h3>Laporan Keuangan Lengkap</h3>
           <p>Neraca, Laba Rugi, Arus Kas, Perubahan Modal, dan Neraca Lajur — otomatis terbentuk dari data transaksi.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon" style="background:rgba(6,182,212,0.1);">✅</div>
+          <h3>Sesuai SAK EMKM &amp; SAK EP</h3>
+          <p>Mendukung Standar Akuntansi Keuangan EMKM untuk usaha mikro-kecil, dan SAK EP untuk entitas privat yang lebih kompleks — sesuai regulasi terkini.</p>
         </div>
         <div class="feature-card">
           <div class="feature-icon" style="background:rgba(139,92,246,0.1);">🏢</div>
@@ -686,7 +691,7 @@
         <div class="who-card">
           <div class="icon">🏢</div>
           <h3>Multi Cabang</h3>
-          <p>Kelola hingga 15 unit/cabang dalam satu akun dengan laporan konsolidasi.</p>
+          <p>Kelola hingga 5 unit/cabang dalam satu akun dengan laporan konsolidasi.</p>
         </div>
         <div class="who-card">
           <div class="icon">🌾</div>
@@ -745,7 +750,7 @@
             <li><span class="cross">✗</span> Export Excel</li>
             <li><span class="cross">✗</span> Unit/Cabang</li>
           </ul>
-          <button onclick="(function(b){b.textContent='Memuat...';b.disabled=true;fetch('https://sikancil-backend-production.up.railway.app/api/v1/auth/demo',{method:'POST'}).then(r=>r.json()).then(d=>{if(!d.success)throw new Error(d.error);window.location.href='https://sikancil-frontend.vercel.app/demo-login?token='+encodeURIComponent(d.data.accessToken);}).catch(e=>{alert('Demo tidak tersedia: '+e.message);b.textContent='Coba Demo Gratis →';b.disabled=false;})})(this)"  class="price-cta" style="background:rgba(100,116,139,0.2);color:#94a3b8;border:none;cursor:pointer;width:100%;padding:12px;">Coba Demo</button>
+          <a href="https://sikancil-frontend.vercel.app/login" class="price-cta" style="background:rgba(100,116,139,0.2);color:#94a3b8;border:none;cursor:pointer;width:100%;padding:12px;display:block;text-align:center;text-decoration:none;">Coba Demo</a>
         </div>
 
         <!-- Student -->
@@ -781,7 +786,7 @@
             <div class="price-amount" id="price-basic">Rp 750.000<span>/bln</span></div>
           </div>
           <ul class="price-features">
-            <li class="inc"><span class="check">✓</span> 5 users</li>
+            <li class="inc"><span class="check">✓</span> 3 users</li>
             <li class="inc"><span class="check">✓</span> Unlimited transaksi</li>
             <li class="inc"><span class="check">✓</span> Export Excel</li>
             <li class="inc"><span class="check">✓</span> Laporan Keuangan</li>
@@ -802,8 +807,8 @@
             <div class="price-amount" id="price-premium">Rp 1.000.000<span>/bln</span></div>
           </div>
           <ul class="price-features">
-            <li class="inc"><span class="check">✓</span> 10 users</li>
-            <li class="inc"><span class="check">✓</span> 5 unit/cabang</li>
+            <li class="inc"><span class="check">✓</span> 5 users</li>
+            <li class="inc"><span class="check">✓</span> 2 unit/cabang</li>
             <li class="inc"><span class="check">✓</span> Bank Rekonsiliasi</li>
             <li class="inc"><span class="check">✓</span> Pembagian SHU</li>
             <li class="inc"><span class="check">✓</span> Proyeksi Keuangan <span class="badge-new">BARU</span></li>
@@ -824,10 +829,11 @@
             <div class="price-amount" id="price-enterprise">Rp 1.500.000<span>/bln</span></div>
           </div>
           <ul class="price-features">
-            <li class="inc"><span class="check">✓</span> 20 users</li>
-            <li class="inc"><span class="check">✓</span> 15 unit/cabang</li>
+            <li class="inc"><span class="check">✓</span> 10 users</li>
+            <li class="inc"><span class="check">✓</span> 5 unit/cabang</li>
             <li class="inc"><span class="check">✓</span> Semua fitur Premium</li>
             <li class="inc"><span class="check">✓</span> Priority Support</li>
+            <li class="inc"><span class="check">✓</span> Dedicated Support / Account Manager</li>
             <li class="inc"><span class="check">✓</span> Unlimited transaksi</li>
           </ul>
           <a href="https://sikancil-frontend.vercel.app/register" class="price-cta" style="background:var(--gold);color:#000;">Daftar — Enterprise</a>
@@ -900,7 +906,7 @@
   <!-- FOOTER -->
   <footer>
     <div class="footer-logo">🦌 SIKANCIL</div>
-    <p style="margin-bottom:8px;">Sistem Informasi Keuangan &amp; Akuntansi</p>
+    <p style="margin-bottom:8px;">Sistem Informasi Akuntansi dan Manajemen</p>
     <p style="margin-bottom:16px;">
       <a href="/cdn-cgi/l/email-protection#8bf8fefbfbe4f9ffcbf8e2e0eae5e8e2e7a5fceee9a5e2ef"><span class="__cf_email__" data-cfemail="05767075756a777145766c6e646b666c692b7260672b6c61">[email&#160;protected]</span></a>
     </p>
