@@ -367,6 +367,46 @@
       position: relative;
     }
 
+    .dedicated-box {
+      margin-top: 24px;
+      border: 1px solid rgba(245,158,11,0.35);
+      background: linear-gradient(135deg, rgba(245,158,11,0.08), rgba(124,58,237,0.06));
+      border-radius: 20px;
+      padding: 32px;
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 32px;
+      align-items: center;
+    }
+
+    .dedicated-features {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .dedicated-features li {
+      font-size: 13.5px;
+      color: var(--text);
+      display: flex;
+      gap: 8px;
+      align-items: flex-start;
+    }
+
+    .dedicated-cta {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 24px;
+      text-align: center;
+    }
+
+    @media (max-width: 720px) {
+      .dedicated-box { grid-template-columns: 1fr; }
+    }
+
     .price-badge {
       display: inline-block;
       font-size: 10px;
@@ -838,6 +878,35 @@
           <a href="https://sikancil-frontend.vercel.app/register" class="price-cta" style="background:var(--gold);color:#000;">Daftar — Enterprise</a>
         </div>
 
+      </div>
+
+      <!-- Dedicated Server -->
+      <div class="dedicated-box">
+        <div>
+          <div class="price-badge" style="background:rgba(245,158,11,0.2);color:#fcd34d;">🖥️ DEDICATED SERVER</div>
+          <h3 style="font-family:'Syne',sans-serif;font-size:22px;font-weight:800;margin-top:8px;">Implementasi Server Sendiri (On-Premise / Private Hosting)</h3>
+          <p style="font-size:14px;color:var(--muted);margin-top:8px;">
+            Cocok untuk instansi, koperasi, atau perusahaan yang ingin sistem berjalan menggunakan domain milik sendiri, terpisah sepenuhnya dari klien lain.
+          </p>
+          <ul class="dedicated-features">
+            <li><span class="check">✓</span> Data tersimpan terpisah, tidak berbagi server dengan pengguna lain</li>
+            <li><span class="check">✓</span> Menggunakan nama domain sendiri (mis. akuntansi.namainstansi.go.id)</li>
+            <li><span class="check">✓</span> Tanpa biaya langganan bulanan</li>
+            <li><span class="check">✓</span> Akumulasi biaya lebih hemat dalam jangka panjang dibanding paket langganan</li>
+            <li><span class="check">✓</span> Kontrol penuh atas server, kebijakan akses, dan keamanan data</li>
+            <li><span class="check">✓</span> Kustomisasi fitur & tampilan sesuai kebutuhan instansi</li>
+            <li><span class="check">✓</span> Tidak bergantung pada ketersediaan/uptime pihak ketiga</li>
+            <li><span class="check">✓</span> Bantuan instalasi awal & migrasi data</li>
+          </ul>
+        </div>
+        <div class="dedicated-cta">
+          <div style="font-size:13px;color:var(--muted);margin-bottom:4px;">Harga</div>
+          <div style="font-family:'Syne',sans-serif;font-size:20px;font-weight:800;margin-bottom:16px;">Hubungi Kami</div>
+          <p style="font-size:13px;color:var(--muted);margin-bottom:20px;">
+            Biaya implementasi menyesuaikan spesifikasi server dan kebutuhan instansi. Silakan hubungi kami via email untuk konsultasi dan penawaran.
+          </p>
+          <a href="mailto:support@sikancil.web.id?subject=Konsultasi%20Dedicated%20Server%20SIKANCIL" class="price-cta" style="background:var(--gold);color:#000;display:block;">Tanya via Email</a>
+        </div>
       </div>
 
       <p style="text-align:center;font-size:13px;color:var(--muted);margin-top:24px;">
