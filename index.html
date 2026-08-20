@@ -101,7 +101,7 @@
       background: var(--accent); border-radius: 100px;
       transition: transform 0.35s cubic-bezier(.2,.9,.3,1), background 0.4s ease; z-index: 0;
     }
-    .mode-switch.edu-active::before { transform: translateX(100%); }
+    .mode-switch.edu-active::before, .mode-switch.second-active::before { transform: translateX(100%); }
     .mode-switch button {
       position: relative; z-index: 1; background: none; border: none; padding: 11px 26px;
       font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 600; color: var(--muted);
@@ -176,7 +176,7 @@
     .edu-week p { font-size: 12px; color: var(--muted); line-height: 1.5; }
 
     /* ── PRICING ── */
-    .billing-toggle { display: inline-flex; background: var(--surface); border: 1px solid var(--border); border-radius: 100px; padding: 4px; margin-top: 20px; }
+    .billing-toggle { display: inline-flex; background: var(--surface); border: 1px solid var(--border); border-radius: 100px; padding: 4px; margin-top: 16px; }
     .toggle-btn { background: none; border: none; padding: 8px 20px; border-radius: 100px; font-family: inherit; font-size: 12.5px; font-weight: 600; color: var(--muted); cursor: pointer; transition: all 0.2s; }
     .toggle-btn.active { background: var(--accent); color: #fff; }
 
@@ -197,7 +197,12 @@
     .check { color: var(--edu); flex-shrink: 0; }
     .price-more { background: none; border: none; color: var(--accent); font-size: 11.5px; font-weight: 600; cursor: pointer; text-align: left; padding: 0; text-decoration: underline; }
     .price-cta { display: block; text-align: center; padding: 10px; border-radius: 9px; font-weight: 600; font-size: 13px; text-decoration: none; margin-top: auto; }
-    .dedicated-mini { display: flex; align-items: center; justify-content: space-between; gap: 16px; background: var(--surface); border: 1px solid var(--border); border-radius: 13px; padding: 16px 20px; margin-top: 18px; font-size: 13px; }
+    .dedicated-box { background: var(--surface); border: 1px solid var(--border); border-radius: 18px; padding: 32px; margin-top: 28px; display: grid; grid-template-columns: 1.5fr 1fr; gap: 32px; align-items: center; }
+    .dedicated-features { list-style: none; display: flex; flex-direction: column; gap: 10px; margin-top: 16px; font-size: 13px; color: var(--text); }
+    .dedicated-features li { display: flex; align-items: flex-start; gap: 8px; line-height: 1.5; }
+    .dedicated-cta-box { text-align: center; background: rgba(245,158,11,0.06); border: 1px solid rgba(245,158,11,0.2); border-radius: 14px; padding: 22px; }
+    @media (max-width: 800px) { .dedicated-box { grid-template-columns: 1fr; } }
+
     .cross { color: #475569; flex-shrink: 0; }
 
     /* ── FAQ ── */
@@ -336,6 +341,7 @@
       </div>
 
       <div class="edu-case">
+        <h2 style="font-family:'Syne',sans-serif;font-size:26px;font-weight:800;color:var(--edu);margin-bottom:6px;">Untuk Akademisi</h2>
         <div class="eyebrow" style="color:var(--edu);">Studi Kasus Nyata</div>
         <h3 style="font-size:22px;font-weight:800;margin-bottom:8px;">Satu Semester, Satu Perusahaan Latihan</h3>
         <p style="color:var(--muted);font-size:13.5px;max-width:640px;">Kurikulum siap pakai untuk mata kuliah Pengantar Akuntansi — mahasiswa mengelola "Toko Makmur Jaya" dari transaksi pertama sampai laporan lengkap.</p>
@@ -356,12 +362,19 @@
       <div class="eyebrow">Harga</div>
       <h2 class="page-title">Pilih Paket yang Tepat</h2>
       <p class="page-sub" style="margin-bottom:0;">Trial 3 hari gratis, tanpa kartu kredit.</p>
-      <div class="billing-toggle">
-        <button class="toggle-btn active" id="btn-monthly" onclick="setBilling('monthly')">Bulanan</button>
-        <button class="toggle-btn" id="btn-yearly" onclick="setBilling('yearly')">Tahunan <span style="color:#22c55e;">-17%</span></button>
+
+      <div class="mode-switch" id="payModeSwitch" style="margin-top:20px;">
+        <button class="active" id="btnSubscription" onclick="setPayMode('subscription')">💳 Berlangganan</button>
+        <button id="btnDedicated" onclick="setPayMode('dedicated')">🖥️ Tidak Berlangganan</button>
       </div>
 
-      <div class="pricing-grid">
+      <div id="payModeSubscriptionView">
+        <div class="billing-toggle">
+          <button class="toggle-btn active" id="btn-monthly" onclick="setBilling('monthly')">Bulanan</button>
+          <button class="toggle-btn" id="btn-yearly" onclick="setBilling('yearly')">Tahunan <span style="color:#22c55e;">-17%</span></button>
+        </div>
+
+        <div class="pricing-grid">
         <div class="price-card">
           <div class="price-badge" style="background:rgba(100,116,139,0.2);color:#94a3b8;">🆓 TRIAL</div>
           <div class="price-name">Trial</div>
@@ -512,11 +525,37 @@
           </ul>
           <a href="https://sikancil-frontend.vercel.app/register" class="price-cta" style="background:var(--gold);color:#000;">Daftar</a>
         </div>
+        </div>
       </div>
 
-      <div class="dedicated-mini">
-        <span>🖥️ Tidak ingin berlangganan? Ada opsi <b>Dedicated Server</b> — investasi sekali bayar, domain sendiri.</span>
-        <a href="mailto:support@sikancil.web.id?subject=Konsultasi%20Dedicated%20Server%20SIKANCIL" class="btn btn-outline btn-sm" style="flex-shrink:0;">Tanya via Email</a>
+      <div id="payModeDedicatedView" style="display:none;">
+        <div class="dedicated-box">
+          <div>
+            <div class="price-badge" style="background:rgba(245,158,11,0.2);color:#fcd34d;">🖥️ DEDICATED SERVER</div>
+            <h3 style="font-family:'Syne',sans-serif;font-size:20px;font-weight:800;margin-top:10px;">Implementasi Server Sendiri (On-Premise / Private Hosting)</h3>
+            <p style="font-size:13.5px;color:var(--muted);margin-top:8px;">
+              Cocok untuk instansi, koperasi, atau perusahaan yang ingin sistem berjalan menggunakan domain milik sendiri, terpisah sepenuhnya dari klien lain.
+            </p>
+            <ul class="dedicated-features">
+              <li><span class="check">✓</span> Domain &amp; branding milik sendiri (mis. akuntansi.namainstansi.go.id) — tampil lebih profesional dan meningkatkan kredibilitas institusi</li>
+              <li><span class="check">✓</span> Tanpa biaya langganan bulanan — investasi sekali di awal, lebih hemat jangka panjang</li>
+              <li><span class="check">✓</span> Data tersimpan terpisah sepenuhnya, tidak berbagi server dengan pengguna lain</li>
+              <li><span class="check">✓</span> Kontrol penuh atas server, kebijakan akses, dan keamanan data</li>
+              <li><span class="check">✓</span> Kustomisasi fitur &amp; tampilan sesuai kebutuhan instansi</li>
+              <li><span class="check">✓</span> Tidak bergantung pada ketersediaan/uptime pihak ketiga</li>
+              <li><span class="check">✓</span> Bantuan instalasi awal &amp; migrasi data</li>
+              <li><span class="check">✓</span> Pelatihan penggunaan sistem gratis untuk tim Anda</li>
+            </ul>
+          </div>
+          <div class="dedicated-cta-box">
+            <div style="font-size:13px;color:var(--muted);margin-bottom:4px;">Harga</div>
+            <div style="font-family:'Syne',sans-serif;font-size:20px;font-weight:800;margin-bottom:14px;">Hubungi Kami</div>
+            <p style="font-size:12.5px;color:var(--muted);margin-bottom:18px;">
+              Biaya implementasi menyesuaikan spesifikasi server dan kebutuhan instansi.
+            </p>
+            <a href="mailto:support@sikancil.web.id?subject=Konsultasi%20Dedicated%20Server%20SIKANCIL" class="price-cta" style="background:var(--gold);color:#000;display:block;">Tanya via Email</a>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -612,6 +651,18 @@
       enterprise: { monthly: 'Rp 1,5jt', yearly: 'Rp 15jt' },
     };
     const suffix = { monthly: '/bln', yearly: '/thn' };
+    // ── Toggle Berlangganan/Tidak Berlangganan -- manual saja, TIDAK
+    // auto-cycle seperti hero (ini keputusan pembelian, bukan showcase
+    // identitas produk, jadi tidak cocok berganti sendiri).
+    function setPayMode(mode) {
+      const isDedicated = mode === 'dedicated';
+      document.getElementById('payModeSwitch').classList.toggle('second-active', isDedicated);
+      document.getElementById('btnSubscription').classList.toggle('active', !isDedicated);
+      document.getElementById('btnDedicated').classList.toggle('active', isDedicated);
+      document.getElementById('payModeSubscriptionView').style.display = isDedicated ? 'none' : 'block';
+      document.getElementById('payModeDedicatedView').style.display = isDedicated ? 'block' : 'none';
+    }
+
     function setBilling(cycle) {
       document.getElementById('btn-monthly').classList.toggle('active', cycle === 'monthly');
       document.getElementById('btn-yearly').classList.toggle('active', cycle === 'yearly');
